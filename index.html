@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	
+	<title>Hangman Demo</title>
+
+</head>
+
+<body>
+
+	<div id="placeHolderText">
+      <p>Let's get this started!</p>
+    </div>
+
+    <script>
+    	var magicWord
+    	var blankWord = []
+    	var chosenLetters = []
+    	guessRemaining = 15
+
+    	var wordBank = {
+		    firstChoice: 'wizard',
+		    secondChoice: 'dragon',
+		    thirdChoice: 'sword',
+		    fourthChoice: 'magic',
+		    fifthChoice: 'potion',
+		    sixthChoice: 'goblin',
+		    seventhChoice:'quest',
+		    eighthChoice: 'treasure',
+		    ninthChoice: 'kingdom',
+		    tenthChoice: 'hero'
+		};
+
+		// Random Key
+		console.log(Object.keys(wordBank)[Math.floor(Math.random()*Object.keys(wordBank).length)]);
+
+		// Random Value
+		magicWord = wordBank[Object.keys(wordBank)[Math.floor(Math.random()*Object.keys(wordBank).length)]];
+
+		// creates blank word bank to display on screen
+		for (var i = 0; i < magicWord.length; i++) {
+			blankWord.push("__ ")
+			
+		}
+
+		//validating output from randomizer
+		console.log(blankWord)
+		console.log(magicWord)
+
+
+		// Display on HTML for user feedback
+		document.onkeyup = function(event) {
+
+        	var userInput = event.key;
+
+    		// Searches randomly chosen word for character match
+        	if (magicWord.indexOf(userInput) != -1) {
+        		var strPosition = magicWord.indexOf(userInput) // identifies index of found character
+        		console.log(strPosition); // returns index position for validation
+        		blankWord[strPosition] = "  " + userInput //replaces correctly guessed characters within blankWord
+
+	       	} 
+
+	        else if (guessRemaining > 0) {
+	        	guessRemaining = guessRemaining - 1
+	        }
+
+
+	       if (guessRemaining > 0) {
+	        	//Creates appended array to show what letters user has chosen
+	        	chosenLetters.push(" " + userInput)
+
+	        	var html = "Your current word is:<br>" + blankWord.join(" ") + "<br></p>" + //changes blankWord to string to lose commas
+	        		"<p>You chose the letter: " + userInput + "</p>" +
+	        		"<p>Your current bank of chosen letters is: <br>" + chosenLetters + "<p>You have " + guessRemaining + " incorrect guesses remaining!"
+	        		
+		        // Set the inner HTML contents of the #game div to our html string
+		        document.querySelector("#placeHolderText").innerHTML = html;
+	    	}
+
+	    	else {
+	    		var html = "Game Over!"
+	    		document.querySelector("#placeHolderText").innerHTML = html;  //ends the game with a game over write on html
+	    	}
+
+	    }
+
+		
+		
+
+    </script>
+	
+</body>
+</html>
