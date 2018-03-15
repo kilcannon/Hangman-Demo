@@ -13,14 +13,18 @@
 <body>
 
 	<div class="jumbotron">
-	  	<h1 class="display-4">Hangman</h1>
-	 	 	<p>Welcome to my simple game of Hangman!</p> <br> 
+	  	<div class="row">
+	  		<div class="col-md-9">
+		  		<center><h1 class="display-4">Hangman</h1>
+		 	 	<p>Welcome to my simple game of Hangman!</p></center> <br> 
+			</div>
+	 	</div>
 	 	 	<div class="row">
 	 	 		<div class="col-md-2">
 		 	 		<img src="assets/images/black-mage-image-right.png" width="80" height="100" alt="black-mage-image">
 		 	 	</div>
-		 	 	<div class="col-md-8">
-		 	 		<h1>The category is "Fantasy"!</h1>
+		 	 	<div class="col-md-5">
+		 	 		<center><h1>The category is "Fantasy"!</h1></center>
 		 	 	</div>
 		 	 	<div class="col-md-2">
 		 	 		<img src="assets/images/black-mage-image.png" width="80" height="100" alt="black-mage-image">
@@ -29,18 +33,16 @@
 	  	<hr class="my-4 place">
 	
 	  	<div class="row">
-			
-			<div class="col-md-12">
+			<div class="col">
 				<div id="placeHolderText">
 			    	<p>Let's get this started! Press any key to begin your game.</p>
 			    </div>
 			</div>
-		
-		</div>
-		
 		<br>
-	    
-	    <button onclick="playAgain()">Play Again?</button>
+		</div>
+		<div class="row">
+	    	<button onclick="playAgain()">Play Again?</button>
+		</div>
 	</div>
 
 
@@ -95,10 +97,11 @@
 		letterCounter = 0 //resets validator of game win
 		chosenLetters = [] //resets array of chose letters in word bank
 		blankWord = [] //resets array of word for user to guess
+		dummyArray = [] //resets array validator
 	}
 
 	function playAgain() {
-
+		gameReset() 
 		wordRandomizer()
 		var html = "<p><h3>Make your first letter choice!</h3></p>" + 
 			"Your current word is:<br>" + blankWord.join(" ") + "<br></p>" + //changes blankWord to string to lose commas
@@ -140,7 +143,7 @@
 
     		if (letterCounter === wordLength) {
     			wins++ // adds to win counter
-    			var html = "Congratulations! You correctly guessed the word: </p>" + magicWord
+    			var html = "Congratulations! You correctly guessed the word: </p><h3>" + magicWord +"</h3>"
     			document.querySelector("#placeHolderText").innerHTML = html;  //ends the game with a game over write on html
 
     			gameReset(); //invokes function to reset specific values for next round
@@ -160,7 +163,7 @@
 	    	
 	    	else {
 	    		losses++ //adds to loss counter
-	    		var html = "Game Over!"
+	    		var html = "<h2>Game Over!</h2>"
 	    		document.querySelector("#placeHolderText").innerHTML = html;  //ends the game with a game over write on html
 
 	    		gameReset(); //invokes function to reset specific values for next round
